@@ -1,0 +1,82 @@
+# ********************************************************************************************
+# Basic configuration for AnyGUI
+# ********************************************************************************************
+[application]
+window_title = "Device Control Panel"
+header_text = "Control Panel for XYZ Device"
+footer_text = "XYZ Corporation - All rights reserved"
+enable_remote_access = true
+javafx_enabled = true
+port = 7070
+
+# ********************************************************************************************
+# IO Plugin Configuration
+# ********************************************************************************************
+[io_plugin]
+type = "file"   # Can be 'file', 'https', 'websocket', etc.
+readFilePath = "src/test/resources/test_read_file.txt"
+writeFilePath = "src/test/resources/test_write_file.txt"
+
+# ********************************************************************************************
+# Format Plugin Configuration
+# ********************************************************************************************
+[format_plugin]
+type = "property"   # Can be 'json', 'properties', 'csv', 'toml', etc.
+charset = "utf-8"
+allowedProperties = ["devicename", "descripton"]
+handleOfNotConfiguredKeys = "delete" # Can be 'delete' or 'keepAndWarn'
+handleOfMissingKeys = "warn" # Can be 'exception' or 'warn'
+jsonSchemaFile = "config.schema.json"
+
+# ********************************************************************************************
+# Widget Plugin Configuration
+# ********************************************************************************************
+# Widget 1 - Textfield
+[[widget_plugins]]
+type = "textfield"
+id = "titleID"
+name = "Title"
+toolTip = "Enter the title"
+placeholder = "title"
+maxlength = 50
+
+[[widget_plugins]]
+type = "textfield"
+id = "deviceNameID"
+name = "Device Name"
+toolTip = "Enter the name of the device"
+placeholder = "Device Name"
+
+[[widget_plugins]]
+type = "boolean"
+id = "activeID"
+name = "Active"
+toolTip = "Check if, its active"
+checked = false
+
+[[widget_plugins]]
+type = "boolean"
+id = "PowerID"
+name = "Power"
+toolTip = "Turn the device on or off"
+checked = false
+
+[[widget_plugins]]
+type = "integer"
+id = "Range"
+name = "Range in int"
+toolTip = "HOW FAST ARE WE GOING?"
+min = 100
+max = 150
+step = 1
+value = 10
+
+[[widget_plugins]]
+type = "float"
+id = "doubleRange"
+name = "Range in Double"
+toolTip = "Turn the device on or off"
+min = 5.0
+max = 15.0
+step = 0.01
+value = 10.15

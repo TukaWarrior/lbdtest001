@@ -1,0 +1,13 @@
+# David Schiavone
+- Java
+- JavaScript
+- HTML
+- CSS
+- Vue
+- React
+- Dart
+- Flutter
+- XML
+- JSON
+- YAML
+- SQL

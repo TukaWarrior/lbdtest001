@@ -1,0 +1,12 @@
+# Joël Bärtschi
+- .NET
+- ASP.NET Core
+- HTML
+- CSS
+- Javascript
+- Java
+- Dart
+- Flutter
+- Docker
+- SQL
+- Blazor

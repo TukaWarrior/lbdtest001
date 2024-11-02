@@ -1,0 +1,13 @@
+# Jannis Wingeyer
+- .NET
+- ASP.NET Core
+- HTML
+- CSS
+- Javascript
+- Typescript
+- React
+- Svelte
+- Python
+- Java
+- Dart
+- Docker

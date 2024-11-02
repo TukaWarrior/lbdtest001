@@ -1,0 +1,13 @@
+# Luca Querciagrossa
+- Git(Hub/Lab)
+- Markdown
+- YAML
+- XML
+- Virtualisierungstechnologien: Proxmox, KVM/QEMU; Hyper-V
+- Netzwerktechnologien: Routers, Switches, Firewalls, DNS- & DHCP-Server, (Reverse)-Proxies
+- Skripting: PowerShell und Bash
+- Programmiersprachen: Python, wenig PHP
+- Betriebssysteme: Windows (Client und Server); diverse Linux-Distros (von Arch über Rocky bis zu Debian)
+- Datenbanken: MySQL, Postgres, MariaDB
+- Containerisierung: Docker
+- Webtechnologien: HTML, CSS

@@ -1,0 +1,40 @@
+<configuration>
+    <property name="LOG_ROOT" value="anygui/log" />
+    <property name="LOG_FILE_NAME" value="anygui" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Timestamp, thread, log level, logger name, class name, method name, log message, and line -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [class : %class] | [method : %method] [line :%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_ROOT}/today_${LOG_FILE_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_ROOT}/%d{yyyy-MM-dd}_${LOG_FILE_NAME}.log</fileNamePattern>
+            <!-- 30 days to keep -->
+            <maxHistory>30</maxHistory>
+
+        </rollingPolicy>
+        <encoder>
+            <!-- Timestamp, thread, log level, logger name, class name, method name, log message, and line -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [class : %class] | [method : %method] [line :%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger configuration for Console (STDOUT) -->
+    <logger name="CONSOLE_LOGGER" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <!-- Logger configuration for File (FILE) -->
+    <logger name="FILE_LOGGER" level="INFO" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

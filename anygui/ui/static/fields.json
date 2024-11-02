@@ -1,0 +1,16 @@
+[
+	{
+		"id": "1",
+		"label": "My first textfield",
+		"hint": "This field is readonly - you cannot edit this",
+		"readonly": false,
+		"type": "textfield"
+	},
+	{
+		"id": "2",
+		"label": "My first textfield",
+		"hint": "This field is readonly - you cannot edit this",
+		"readonly": false,
+		"type": "textfield"
+	}
+]

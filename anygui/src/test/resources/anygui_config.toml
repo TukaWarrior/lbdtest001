@@ -1,0 +1,22 @@
+[webapp]
+port = 7070
+context_path = "/myapp"
+
+[gui]
+window_title = "My Application"
+width = 800
+height = 600
+
+[format_plugin]
+charset = 'UTF-8'
+format_type = "json"
+output_dir = "/var/output"
+
+[ui_plugin]
+theme = "dark"
+language = "en"
+
+[io_plugin]
+type = "file"   # Can be 'file', 'https', 'websocket', etc.
+filepath = "src/test/resources/test_file.txt"
+poll_interval = 1000  # Poll interval in milliseconds for the file
