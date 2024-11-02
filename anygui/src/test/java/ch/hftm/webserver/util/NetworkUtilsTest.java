@@ -28,7 +28,7 @@ class NetworkUtilsTest {
 
     @Test
     void testGetLocalhostIpAddress() {
-        String localhostIp = "1234";
+        String localhostIp = NetworkUtils.getLocalhostIpAddress();
 
         // Check that the localhost IP is not null
         assertNotNull(localhostIp, "The localhost IP address should not be null");
