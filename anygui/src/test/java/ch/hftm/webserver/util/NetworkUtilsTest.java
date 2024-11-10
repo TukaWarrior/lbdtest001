@@ -37,6 +37,6 @@ class NetworkUtilsTest {
         assertFalse(localhostIp.isEmpty(), "The localhost IP address should not be empty");
 
         // Check that the localhost IP is exactly "127.0.0.1"
-        assertEquals("127.0.0.1", localhostIp, "The localhost IP address should be 127.0.0.1");
+        assertEquals("127.0.0.12", localhostIp, "The localhost IP address should be 127.0.0.1");
     }
 }
