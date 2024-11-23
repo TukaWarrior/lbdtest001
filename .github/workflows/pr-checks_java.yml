@@ -1,0 +1,88 @@
+# The documentation for this workflow can be found here: docs/developer/Compliance/Github Actions/workflow_pr-check_java.md
+# This workflow runs java tests for pull requests on multiple operating systems.
+# Tests are run sequentially: Linux → Windows → macOS, to save compute minutes by failing fast on the cheapest platform.
+name: Pull Request Checks
+
+# Only trigger this workflow for pull requests targeting main branch and when relevant files change.
+on:
+  pull_request:
+    branches: [ "main" ]
+    # Trigger on PR creation, updates, and reopening.
+    types: [opened, synchronize, reopened]
+    # Only run workflow when these paths change to avoid unnecessary builds.
+    paths:
+      - 'anygui/src/**' # Any change in source code.
+      - 'anygui/pom.xml' # Any change in dependencies.
+      - '.github/workflows/**' # Any change in workflow files.
+
+# Set timeout for downloading cached dependencies from GitHub's cache storage.
+env:
+  SEGMENT_DOWNLOAD_TIMEOUT_MINS: '5'
+
+# Cancel any in-progress runs of this workflow when new commits are pushed to the PR.
+# This prevents queued builds from running if they're no longer relevant.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux-java-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java and Maven Cache
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          check-latest: false # Use cached JDK version for faster setup
+          cache: maven # Enable built-in Maven dependency caching
+          cache-dependency-path: './anygui/pom.xml' # Path to pom.xml for cache key generation
+          
+      - name: Run Maven Tests on Linux
+        working-directory: ./anygui
+        run: mvn -B clean verify
+
+  # windows-java-check:
+  #   needs: linux-java-check
+  #   if: success()
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v4
+
+  #     - name: Setup Java and Maven Cache
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: '21'
+  #         distribution: 'temurin'
+  #         check-latest: false
+  #         cache: maven
+  #         cache-dependency-path: './anygui/pom.xml'
+
+  #     - name: Build and Test on Linux
+  #       working-directory: ./anygui
+  #       run: mvn -B clean package
+
+  # macos-java-check:
+  #   needs: windows-java-check
+  #   if: success()
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v4
+
+  #     - name: Setup Java and Maven Cache
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: '21'
+  #         distribution: 'temurin'
+  #         check-latest: false
+  #         cache: maven
+  #         cache-dependency-path: './anygui/pom.xml'
+
+  #     - name: Build and Test on macOS
+  #       working-directory: ./anygui
+  #       run: mvn -B clean package
