@@ -12,15 +12,7 @@ public class NetworkUtils {
      *
      * @return the active IP address as a String, or null if an error occurs
      */
-    public static String getActiveIpAddress() {
-        try (Socket socket = new Socket("8.8.8.8", 53)) { // Google DNS server (no real data is sent)
-            InetAddress localAddress = socket.getLocalAddress();
-            return localAddress.getHostAddress();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+
 
     public static String getLocalhostIpAddress() {
         return localhostAdrerss;
