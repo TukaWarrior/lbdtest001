@@ -33,14 +33,17 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Determine if relevant files have changed
         id: check
         run: |
-          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -qE '^anygui/src/|^anygui/pom.xml'; then
-            echo "::set-output name=run_tests::true"
+          git fetch origin ${{ github.base_ref }}
+          if git diff --name-only origin/${{ github.base_ref }}..HEAD | grep -qE '^anygui/src/|^anygui/pom.xml'; then
+            echo "run_tests=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=run_tests::false"
+            echo "run_tests=false" >> $GITHUB_OUTPUT
           fi
         shell: bash
 
@@ -67,7 +70,7 @@ jobs:
 
   windows-java-check:
     needs: linux-java-check
-    if: ${{ needs.check-changes.outputs.run_tests == 'true' && needs.linux-java-check.result == 'success' }}
+    if: ${{ needs.check-changes.outputs.run_tests == 'true' && needs.linux-java-check.result == 'success'}}
     runs-on: windows-latest
     steps:
       - name: Checkout Repository
@@ -88,7 +91,7 @@ jobs:
 
   macos-java-check:
     needs: windows-java-check
-    if: ${{ needs.check-changes.outputs.run_tests == 'true' && needs.windows-java-check.result == 'success' }}
+    if: ${{ needs.check-changes.outputs.run_tests == 'true' && needs.windows-java-check.result == 'success'}}
     runs-on: macos-latest
     steps:
       - name: Checkout Repository
