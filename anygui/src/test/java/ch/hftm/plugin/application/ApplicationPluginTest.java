@@ -38,7 +38,7 @@ public class ApplicationPluginTest {
                 ConfigKeysConstants.APPLICATION_TITLE + " = \"Device Control Panel\"\n" +
                 ConfigKeysConstants.APPLICATION_HEADER_TEXT + " = \"Control Panel for XYZ Device\"\n" +
                 ConfigKeysConstants.APPLICATION_FOOTER_TEXT + " = \"XYZ Corporation - All rights reserved\"\n" +
-                ConfigKeysConstants.APPLICATION_ENABLE_REMOTE + " = false\n" +
+                ConfigKeysConstants.APPLICATION_ENABLE_REMOTE + " = true\n" +
                 ConfigKeysConstants.APPLICATION_JAVAFX_ENABLED + " = true\n" +
                 ConfigKeysConstants.APPLICATION_PORT + " = 7070\n";
 
