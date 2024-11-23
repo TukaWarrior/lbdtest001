@@ -24,5 +24,6 @@ public class NetworkUtils {
 
     public static String getLocalhostIpAddress() {
         return localhostAdrerss;
+        // Test
     }
 }
