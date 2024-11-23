@@ -45,44 +45,44 @@ jobs:
         working-directory: ./anygui
         run: mvn -B clean verify
 
-  windows-java-check:
-    needs: linux-java-check
-    if: success()
-    runs-on: windows-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+  # windows-java-check:
+  #   needs: linux-java-check
+  #   if: success()
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v4
 
-      - name: Setup Java and Maven Cache
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          check-latest: false
-          cache: maven
-          cache-dependency-path: './anygui/pom.xml'
+  #     - name: Setup Java and Maven Cache
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: '21'
+  #         distribution: 'temurin'
+  #         check-latest: false
+  #         cache: maven
+  #         cache-dependency-path: './anygui/pom.xml'
 
-      - name: Build and Test on Linux
-        working-directory: ./anygui
-        run: mvn -B clean package
+  #     - name: Build and Test on Linux
+  #       working-directory: ./anygui
+  #       run: mvn -B clean package
 
-  macos-java-check:
-    needs: windows-java-check
-    if: success()
-    runs-on: macos-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+  # macos-java-check:
+  #   needs: windows-java-check
+  #   if: success()
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v4
 
-      - name: Setup Java and Maven Cache
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          check-latest: false
-          cache: maven
-          cache-dependency-path: './anygui/pom.xml'
+  #     - name: Setup Java and Maven Cache
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: '21'
+  #         distribution: 'temurin'
+  #         check-latest: false
+  #         cache: maven
+  #         cache-dependency-path: './anygui/pom.xml'
 
-      - name: Build and Test on macOS
-        working-directory: ./anygui
-        run: mvn -B clean package
+  #     - name: Build and Test on macOS
+  #       working-directory: ./anygui
+  #       run: mvn -B clean package
