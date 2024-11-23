@@ -31,20 +31,18 @@ jobs:
     outputs:
       run_tests: ${{ steps.check.outputs.run_tests }}
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Determine if relevant files have changed
         id: check
-        shell: bash
         run: |
           if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -qE '^anygui/src/|^anygui/pom.xml|^\.github/workflows/'; then
-            echo "run_tests=true" >> $GITHUB_ENV
             echo "::set-output name=run_tests::true"
           else
-            echo "run_tests=false" >> $GITHUB_ENV
             echo "::set-output name=run_tests::false"
           fi
+        shell: bash
 
   linux-java-check:
     runs-on: ubuntu-latest
