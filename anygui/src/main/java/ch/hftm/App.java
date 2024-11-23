@@ -32,4 +32,5 @@ public class App{
             log.info("Plugin created: {}", plugin);
         }
     }
+    // Test
 }
