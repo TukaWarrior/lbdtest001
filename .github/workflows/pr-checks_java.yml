@@ -26,7 +26,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  linux-check:
+  linux-java-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -43,10 +43,10 @@ jobs:
           
       - name: Run Maven Tests on Linux
         working-directory: ./anygui
-        run: mvn clean verify
+        run: mvn -B clean verify
 
-  windows-check:
-    needs: linux-check
+  windows-java-check:
+    needs: linux-java-check
     if: success()
     runs-on: windows-latest
     steps:
@@ -64,10 +64,10 @@ jobs:
 
       - name: Build and Test on Linux
         working-directory: ./anygui
-        run: mvn clean package
+        run: mvn -B clean package
 
-  macos-check:
-    needs: windows-check
+  macos-java-check:
+    needs: windows-java-check
     if: success()
     runs-on: macos-latest
     steps:
@@ -85,4 +85,4 @@ jobs:
 
       - name: Build and Test on macOS
         working-directory: ./anygui
-        run: mvn clean package
+        run: mvn -B clean package
